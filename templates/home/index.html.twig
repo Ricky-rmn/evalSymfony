@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .logo { width: 100px; height: 80px; } 
+    .product-image { width: 200px; height: auto; } 
+
+</style>
+
+<div class="example-wrapper">
+{% if app.user.userIdentifier is defined %}
+    <h1>Hello  {{ app.user.userIdentifier }} </h1>
+{% endif %}
+    <h2> Bienvenue sur notre site de vente de produits.</h2>
+
+    <table border=1>
+
+    <h2>Découvrez nos derniers articles :</h2>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Stock</th>
+        </tr>
+        {% for item in tabItem %}  
+            <tr>
+                <td><a href="{{ path('my_product', {'id': item.id}) }}">{{ item.nom }}</a></td>
+                <td>{{ item.description }}</td>
+                <td><img class="product-image" src="{{ asset(item.image) }}" alt="Product Image"></td>
+                <td>{{ item.stock }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+</div>
+{% endblock %}

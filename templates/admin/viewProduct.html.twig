@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}  
+{% block body %}
+  <div>        
+    <button onClick="location.href = '{{ path ('add_product', {'id': 0})}}'">Ajouter un produit</button>
+  </div>
+  <div>
+    <h1>Nos produits.</h1>
+    <h2>Inventaire des produits disponibles</h2>
+    <table border="1" >
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Stock</th>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+      </tr>
+      {% for product in myProducts %}  
+        <tr>
+          <td><a href="{{ path('my_product', {'id': product.id}) }}">{{ product.nom }}</a></td>
+          <td>{{ product.description }}</td>
+          <td><img class="product-image" src="{{ asset(product.image) }}" alt="Product Image"></td>
+          <td>{{ product.stock }}</td>
+          <td><button onclick="location.href = '{{ path ('add_product', {'id': product.id})}}'" >Modifier</button></td>
+          <td><button onclick="location.href = '{{ path ('delete_product', { 'id': product.id})}}'">Supprimer</button></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <script>
+    {# document.getElementById("toggleForm").addEventListener("click", function() {
+      var formContainer = document.getElementById("formContainer");
+      if (formContainer.style.display === "none") {
+        formContainer.style.display = "block";
+      } else {
+        formContainer.style.display = "none";
+      }
+    }); #}
+
+    function modifyProduct(productId) {
+      console.log("Modifying product with ID: " + productId);
+    }
+
+    function deleteProduct(productId) {
+      console.log("Deleting product with ID: " + productId);
+    }
+  </script>
+{% endblock %}

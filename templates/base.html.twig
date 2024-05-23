@@ -12,6 +12,21 @@
         {% endblock %}
     </head>
     <body>
+        <div class="header">
+            <div>
+                <button onClick="location.href = '{{ path ('app_home')}}'">Accueil</button>
+                <button onClick="location.href = '{{ path ('app_products')}}'">Mes produits</button>
+                {% if app.user.email is defined %}
+                    <button onClick="location.href = '{{ path ('app_logout')}}'">Deconnexion</button>
+                    <button onClick="location.href = '{{ path ('admin_comments')}}'">Tous les commentaires</button>
+                {% endif %}
+                <button onClick="location.href = '{{ path ('view_product')}}'">Admin</button>
+            </div>
+
+            <div>
+                <img class="logo" src="{{asset('assets/img/LogoDuSite.png')}}" alt="logo">
+            </div>
+        </div>
         {% block body %}{% endblock %}
     </body>
 </html>

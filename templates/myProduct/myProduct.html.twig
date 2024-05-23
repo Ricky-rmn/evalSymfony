@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .comment_title { padding: 30px}
+    .comment_section { margin-top: 20px; padding: 30px}
+</style>
+
+{%if myProduct is null %}
+    <div> Le produit sélectionné n'existe pas. </div>
+{% else %}
+    <div class="example-wrapper">
+
+        <h2> {{myProduct.nom}}</h2>
+        <table border=1>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Stock</th>
+            </tr>
+                <tr>
+                    <td>{{myProduct.nom}}</td>
+                    <td>{{myProduct.description}}</td>
+                    <td><img class="product-image" src="{{ asset(myProduct.image) }}" alt="Product Image"></td>
+                    <td>{{myProduct.stock}}</td>
+                </tr>
+        </table>
+    </div>
+    
+    <div class="comment_title"> 
+    <h2> Avis</h2>
+        {% for commentaire in myProduct.commentaires %}
+           <p><b>{{commentaire.titre}}</b> </p>  
+           <p>{{commentaire.contenu}}</p>       
+        {% endfor %}
+    </div>
+
+    <div class="comment_section">
+        <h3> Laissez nous un commentaire sur le produit</h3>
+        {{form(formulaireCommmentaire)}}
+    </div>
+    
+{% endif %}
+{% endblock %}

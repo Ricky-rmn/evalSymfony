@@ -1,0 +1,33 @@
+{# templates/admin/commentaires.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Commentaires{% endblock %}
+
+{% block body %}
+    <h1>Commentaires</h1>
+
+    <table border ="1" >
+        <thead>
+            <tr>
+                
+                <th>Titre du commentaire</th>
+                <th>Commentaire</th>
+                <th>Produit associé</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for commentaire in commentaires %}
+                <tr>
+                    <td>{{ commentaire.titre }}</td>
+                    <td>{{ commentaire.contenu }}</td>
+                    <td>{{ commentaire.produit.nom }}</td>
+                    <td>
+                        <a href="{{ path('delete_commentaire', {id: commentaire.id}) }}" onclick="return confirm('Are you sure you want to delete this commentaire?')">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
